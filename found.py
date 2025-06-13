@@ -1,6 +1,5 @@
 import os
 import requests
-import pyttsx3
 import webbrowser
 
 # Benutzername holen
@@ -14,9 +13,7 @@ try:
 except:
     latlon = "unknown"
 
-# Text-to-Speech
-tts = pyttsx3.init()
-tts.setProperty('rate', 130)
+# Sprach-Nachricht per espeak
 messages = [
     f"We found you, {username}",
     "We know where you are",
@@ -24,6 +21,6 @@ messages = [
     "We do not forgive, we do not forget",
     "Expect us"
 ]
+
 for msg in messages:
-    tts.say(msg)
-tts.runAndWait()
+    os.system(f'espeak "{msg}"')
